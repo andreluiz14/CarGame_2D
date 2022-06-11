@@ -36,10 +36,10 @@ public class VeiculoScript : MonoBehaviour
    
     private void OnCollisionEnter2D(Collision2D outro)
     {
-        if (outro.gameObject.CompareTag("Quadra"))
-        {
+        //if (outro.gameObject.CompareTag("Quadra"))
+        //{
            
-        }
+        //}
     }
     void MovimentoRb()
     {
