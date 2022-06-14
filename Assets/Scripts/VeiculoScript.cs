@@ -12,6 +12,13 @@ public class VeiculoScript : MonoBehaviour
     [SerializeField] float velocidade = 20;
     [SerializeField] float velocidadeRotacao = 60;
     // Start is called before the first frame update
+
+    //Movimento baseado na direção que o jogador escolhe
+    private Vector2 carroLocalizacao;
+    float carroDirecao;
+    float carroVelocidade;
+    float direcaoAngulo;
+    float rodaDinstancia;
     void Start()
     {
         veiculoRb = GetComponent<Rigidbody2D>();
@@ -45,5 +52,12 @@ public class VeiculoScript : MonoBehaviour
     {
         movDirecao = transform.up * Input.GetAxis("Vertical") * Time.deltaTime * velocidade;
         veiculoRb.MovePosition(transform.position + movDirecao);
+    }
+    void MovimentoBaseadoDirecao()
+    {
+        Vector2 frenteRoda = carroLocalizacao + rodaDinstancia / 2 * new Vector2(Mathf.Cos(carroDirecao), Mathf.Sin(carroDirecao));
+        Vector2 trasRoda = carroLocalizacao - rodaDinstancia / 2 * new Vector2(Mathf.Cos(carroDirecao), Mathf.Sin(carroDirecao));
+
+        trasRoda += carroVelocidade
     }
 }
