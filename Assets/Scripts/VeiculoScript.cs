@@ -9,16 +9,15 @@ public class VeiculoScript : MonoBehaviour
     private float verticalInput;
     private Vector3 movDirecao;
 
-    [SerializeField] float velocidade = 20;
+    [SerializeField] float velocidade ;
     [SerializeField] float velocidadeRotacao = 60;
     // Start is called before the first frame update
 
     //Movimento baseado na direção que o jogador escolhe
-    private Vector2 carroLocalizacao;
-    float carroDirecao;
-    float carroVelocidade;
-    float direcaoAngulo;
-    float rodaDinstancia;
+    [SerializeField] float aceleracaoForca = 5f;
+    [SerializeField] float rotacaoForca = 5f;
+    [SerializeField] float rotacaoQuantidade, direcao;
+
     void Start()
     {
         veiculoRb = GetComponent<Rigidbody2D>();
@@ -27,11 +26,12 @@ public class VeiculoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Movimento();
+        //Movimento();
     }
     private void FixedUpdate()
     {
-        MovimentoRb();
+        //MovimentoRb();
+        MovimentoRelativoDirecao();
     }
     void Movimento()
     {
@@ -40,24 +40,22 @@ public class VeiculoScript : MonoBehaviour
         transform.Rotate(Vector3.forward * -horizontalInput * Time.deltaTime * velocidadeRotacao);
         //transform.Translate(Vector2.up * verticalInput * Time.deltaTime * velocidade);
     }
-   
-    private void OnCollisionEnter2D(Collision2D outro)
-    {
-        //if (outro.gameObject.CompareTag("Quadra"))
-        //{
-           
-        //}
-    }
     void MovimentoRb()
     {
         movDirecao = transform.up * Input.GetAxis("Vertical") * Time.deltaTime * velocidade;
         veiculoRb.MovePosition(transform.position + movDirecao);
     }
-    void MovimentoBaseadoDirecao()
+    void MovimentoRelativoDirecao()
     {
-        Vector2 frenteRoda = carroLocalizacao + rodaDinstancia / 2 * new Vector2(Mathf.Cos(carroDirecao), Mathf.Sin(carroDirecao));
-        Vector2 trasRoda = carroLocalizacao - rodaDinstancia / 2 * new Vector2(Mathf.Cos(carroDirecao), Mathf.Sin(carroDirecao));
+        rotacaoQuantidade = - Input.GetAxis("Horizontal");
+        velocidade = Input.GetAxis("Vertical") * aceleracaoForca;
+        direcao = Mathf.Sign(Vector2.Dot(veiculoRb.velocity, veiculoRb.GetRelativeVector(Vector2.up)));
 
-        trasRoda += carroVelocidade
+        if(velocidade != 0)
+        veiculoRb.rotation += rotacaoQuantidade * rotacaoForca * veiculoRb.velocity.magnitude * direcao;
+
+        veiculoRb.AddRelativeForce(Vector2.up * velocidade);
+        if(velocidade != 0)
+        veiculoRb.AddRelativeForce(-Vector2.right * veiculoRb.velocity.magnitude * rotacaoQuantidade /2);
     }
 }
