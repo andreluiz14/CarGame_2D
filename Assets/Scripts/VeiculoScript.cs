@@ -5,12 +5,19 @@ using UnityEngine;
 public class VeiculoScript : MonoBehaviour
 {
     Rigidbody2D veiculoRb;
-    
+    [Header("Atalhos")]
+    [SerializeField] KeyCode teclaInteracao;
+
     //Movimento baseado na direção que o jogador escolhe
+    [Header("Movimentação")]
     [SerializeField] float aceleracaoForca = 5f;
     [SerializeField] float rotacaoForca = 5f;
     [SerializeField] float rotacaoQuantidade, direcao, velocidade;
 
+    //Entregas
+    [Header("Entrega")]
+    [SerializeField] int entrega, cargaMaxima;
+    public int produto;
     void Start()
     {
         veiculoRb = GetComponent<Rigidbody2D>();
@@ -39,5 +46,27 @@ public class VeiculoScript : MonoBehaviour
 
         if (velocidade <= 0.5f)
             veiculoRb.angularVelocity = 0f;
+    }
+    void OnTriggerEnter2D(Collider2D outro)
+    {
+        if (outro.gameObject.CompareTag("Entrega"))
+        {
+            entrega += 1;
+        }
+        
+    }
+    private void OnTriggerStay2D(Collider2D outro)
+    {
+        // Reabastecimento
+        if (outro.gameObject.CompareTag("Produto") && Input.GetKeyDown(teclaInteracao))
+        {
+            produto = cargaMaxima;
+            print(produto);
+        }
+        //Entrega
+        if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && produto > 0)
+        {
+            produto -= 1;
+        }
     }
 }
