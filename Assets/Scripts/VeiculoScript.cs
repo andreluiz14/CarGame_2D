@@ -17,7 +17,7 @@ public class VeiculoScript : MonoBehaviour
     //Entregas
     [Header("Entrega")]
     [SerializeField] int entrega, cargaMaxima;
-    public int produto;
+    public int carga;
     void Start()
     {
         veiculoRb = GetComponent<Rigidbody2D>();
@@ -60,13 +60,13 @@ public class VeiculoScript : MonoBehaviour
         // Reabastecimento
         if (outro.gameObject.CompareTag("Produto") && Input.GetKeyDown(teclaInteracao))
         {
-            produto = cargaMaxima;
-            print(produto);
+            carga = cargaMaxima;
+            print(carga);
         }
         //Entrega
-        if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && produto > 0)
+        if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && carga > 0)
         {
-            produto -= 1;
+            carga -= 1;
         }
     }
 }
