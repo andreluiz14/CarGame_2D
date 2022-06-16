@@ -12,9 +12,11 @@ public class InterfaceScript : MonoBehaviour
         veiculo = FindObjectOfType<VeiculoScript>();
         pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
         pontuacao.Carga = PlayerPrefs.GetInt("Carga: ",0);
+        pontuacao.Entregas = PlayerPrefs.GetInt("Entregas: ", 0);
     }
     void Update()
     {
         pontuacao.Carga = veiculo.carga;
+        pontuacao.Entregas = veiculo.entrega;
     }
 }

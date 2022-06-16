@@ -15,9 +15,9 @@ public class VeiculoScript : MonoBehaviour
     [SerializeField] float rotacaoQuantidade, direcao, velocidade;
 
     //Entregas
-    [Header("Entrega")]
-    [SerializeField] int entrega, cargaMaxima;
-    public int carga;
+    [Header("Carga do veículo")]
+    [SerializeField] int cargaMaxima;
+    public int carga, entrega;
     void Start()
     {
         veiculoRb = GetComponent<Rigidbody2D>();
@@ -47,14 +47,6 @@ public class VeiculoScript : MonoBehaviour
         if (velocidade <= 0.5f)
             veiculoRb.angularVelocity = 0f;
     }
-    void OnTriggerEnter2D(Collider2D outro)
-    {
-        if (outro.gameObject.CompareTag("Entrega"))
-        {
-            entrega += 1;
-        }
-        
-    }
     private void OnTriggerStay2D(Collider2D outro)
     {
         // Reabastecimento
@@ -66,6 +58,7 @@ public class VeiculoScript : MonoBehaviour
         if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && carga > 0)
         {
             carga -= 1;
+            entrega += 1;
         }
     }
 }
