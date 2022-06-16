@@ -57,5 +57,8 @@ public class VeiculoScript : MonoBehaviour
         veiculoRb.AddRelativeForce(Vector2.up * velocidade);
         if(velocidade != 0)
         veiculoRb.AddRelativeForce(-Vector2.right * veiculoRb.velocity.magnitude * rotacaoQuantidade /2);
+
+        if (velocidade <= 0.5f)
+            veiculoRb.angularVelocity = 0f;
     }
 }
