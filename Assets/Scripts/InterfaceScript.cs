@@ -22,6 +22,6 @@ public class InterfaceScript : MonoBehaviour
     {
         //pontuacao.Carga = veiculo.carga;
         pontuacao.Entregas = veiculo.entrega;
-        pontosEntregaScript.QuantidadeEntrega = PlayerPrefs.GetInt (null, 0);
+        //pontosEntregaScript.QuantidadeEntrega = PlayerPrefs.GetInt (null, 0);
     }
 }
