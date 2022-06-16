@@ -61,7 +61,6 @@ public class VeiculoScript : MonoBehaviour
         if (outro.gameObject.CompareTag("Produto") && Input.GetKeyDown(teclaInteracao))
         {
             carga = cargaMaxima;
-            print(carga);
         }
         //Entrega
         if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && carga > 0)

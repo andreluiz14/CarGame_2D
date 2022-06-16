@@ -12,7 +12,8 @@ public class GerenciamentoPontuacaoScript : MonoBehaviour
     { 
         get { return carga; } 
         set {
-            carga = value; textoCarga.text = carga.ToString();
+            carga = value; 
+            textoCarga.text = "Carga: " + carga.ToString();
             PlayerPrefs.SetInt("Carga: ", carga);
         } 
     }
