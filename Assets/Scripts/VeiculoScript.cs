@@ -19,6 +19,7 @@ public class VeiculoScript : MonoBehaviour
     [Header("Carga do veículo")]
     [SerializeField] int cargaMaxima;
     public int carga, entrega;
+    
     void Start()
     {
         pontosEntregaScript = FindObjectOfType<PontoEntregaScript>();
@@ -60,6 +61,7 @@ public class VeiculoScript : MonoBehaviour
         //Entrega
         if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && carga > 0)
         {
+            print(pontosEntregaScript.QuantidadeEntrega);
             carga -= 1;
             entrega += 1;
         }

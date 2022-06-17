@@ -1,21 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+using TMPro;
 public class PontoEntregaScript : MonoBehaviour
 {
     private int quantidadeEntrega;
-    [SerializeField] Text TextoQuantidadeEntrega;
+    //[SerializeField] TextMeshProUGUI TextoQuantidadeEntrega;
+    [SerializeField] TextMeshPro TextoQuantidadeEntrega;
     public int QuantidadeEntrega
     {
         get 
-        { 
+        {
             return quantidadeEntrega; 
         }
         set 
         { 
             quantidadeEntrega = value;
             TextoQuantidadeEntrega.text = quantidadeEntrega.ToString();
-            quantidadeEntrega = Random.Range(0, 4);
+            quantidadeEntrega = Random.Range(1, 4);
             PlayerPrefs.SetInt(null, QuantidadeEntrega);
         }
     }
