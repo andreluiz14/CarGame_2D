@@ -16,12 +16,12 @@ public class InterfaceScript : MonoBehaviour
 
         pontuacao.Carga = PlayerPrefs.GetInt("Carga: ",0);
         pontuacao.Entregas = PlayerPrefs.GetInt("Entregas: ", 0);
-        pontoEntrega.QuantidadeEntrega = PlayerPrefs.GetInt(null, 0);
+        //pontoEntrega.QuantidadeEntrega = PlayerPrefs.GetInt(null, 0);
     }
     void Update()
     {
         pontuacao.Carga = veiculo.carga;
         pontuacao.Entregas = veiculo.entrega;
-        pontoEntrega.QuantidadeEntrega = PlayerPrefs.GetInt(null, 0);
+        //pontoEntrega.QuantidadeEntrega = PlayerPrefs.GetInt(null, 0);
     }
 }

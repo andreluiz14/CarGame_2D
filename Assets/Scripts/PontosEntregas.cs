@@ -6,14 +6,12 @@ public class PontosEntregas : MonoBehaviour
 {
     [SerializeField] List<GameObject> pontoEntrega = new List<GameObject>();
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    }
+    public void EntrouNoTrigger2D(Collider2D veiculo, IdPonto id)
     {
-        
+        print(veiculo + "  " + id);
     }
 }
