@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class VeiculoScript : MonoBehaviour
 {
-    private PontoEntregaScript pontosEntregaScript;
     Rigidbody2D veiculoRb;
     [Header("Atalhos")]
     [SerializeField] KeyCode teclaInteracao;
@@ -22,7 +21,6 @@ public class VeiculoScript : MonoBehaviour
     
     void Start()
     {
-        pontosEntregaScript = FindObjectOfType<PontoEntregaScript>();
         veiculoRb = GetComponent<Rigidbody2D>();
     }
 
@@ -61,7 +59,6 @@ public class VeiculoScript : MonoBehaviour
         //Entrega
         if(outro.gameObject.CompareTag("Entrega") && Input.GetKeyDown(teclaInteracao) && carga > 0)
         {
-            print(pontosEntregaScript.QuantidadeEntrega);
             carga -= 1;
             entrega += 1;
         }

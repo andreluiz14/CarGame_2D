@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 public class PontoEntregaScript : MonoBehaviour
 {
     private int quantidadeEntrega;
-    //[SerializeField] TextMeshProUGUI TextoQuantidadeEntrega;
+    private int randomQtd;
     [SerializeField] TextMeshPro TextoQuantidadeEntrega;
     public int QuantidadeEntrega
     {
@@ -13,12 +12,26 @@ public class PontoEntregaScript : MonoBehaviour
             return quantidadeEntrega; 
         }
         set 
-        { 
+        {
             quantidadeEntrega = value;
             TextoQuantidadeEntrega.text = quantidadeEntrega.ToString();
-            quantidadeEntrega = Random.Range(1, 4);
             PlayerPrefs.SetInt(null, QuantidadeEntrega);
         }
     }
-
+    private void Start()
+    {
+        randomQtd = Random.Range(1, 3);
+        QuantidadeEntrega = randomQtd;
+    }
+    private void OnTriggerStay2D(Collider2D outro)
+    {
+        if (outro.gameObject.CompareTag("Player") && Input.GetKey(KeyCode.R))
+        {
+            if(QuantidadeEntrega > 0)
+            {
+                QuantidadeEntrega -= 1;
+                print(QuantidadeEntrega);
+            }
+        }
+    }
 }
