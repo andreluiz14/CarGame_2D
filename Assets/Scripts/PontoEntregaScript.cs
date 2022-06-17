@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class PontoEntregaScript : MonoBehaviour
@@ -5,6 +6,7 @@ public class PontoEntregaScript : MonoBehaviour
     private int quantidadeEntrega;
     private int randomQtd;
     [SerializeField] TextMeshPro TextoQuantidadeEntrega;
+    [SerializeField] List<GameObject> pontoEntrega;
     public int QuantidadeEntrega
     {
         get 
