@@ -16,12 +16,6 @@ public class PontoFilho : MonoBehaviour
     {
         pontosEntega = FindObjectOfType<PontosEntregas>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerStay2D(Collider2D veiculo)
     {
         if(veiculo.gameObject.name == "Veiculo")
