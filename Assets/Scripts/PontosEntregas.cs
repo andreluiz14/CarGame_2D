@@ -6,26 +6,25 @@ using TMPro;
 
 public class PontosEntregas : MonoBehaviour
 {
-    [SerializeField] GameObject[] pontoEntrega = new GameObject[12];
+    [SerializeField] PontoFilho[] pontoEntrega = new PontoFilho[12];
     [SerializeField] TextMeshPro[] textoQdt = new TextMeshPro[12];
     private int[] num = new int[12];
     public int totalEntregas;
     // Start is called before the first frame update
     private void Start()
     {
-        GerarQuantidaEntrega();
+        CalculoTotalEntrega();
     }
     public void EntrouNoTrigger2D(Collider2D veiculo, IdPonto id)
     {
-        print(veiculo + "  " + id + " Qtd ");
+        
     }
-    private void GerarQuantidaEntrega()
+    public void CalculoTotalEntrega()
     {
-        for (int i = 0; i < textoQdt.Length; i++)
+        for(int i = 0; i < 12; i++)
         {
-            num[i] = Random.Range(1, 4);
-            totalEntregas += num[i];
-            textoQdt[i].text = num[i].ToString();
+            totalEntregas += pontoEntrega[i].numRandom;
         }
     }
+   
 }
