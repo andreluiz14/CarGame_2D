@@ -23,11 +23,6 @@ public class VeiculoScript : MonoBehaviour
     {
         veiculoRb = GetComponent<Rigidbody2D>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
     private void FixedUpdate()
     {
         MovimentoRelativoDirecao();
@@ -52,7 +47,7 @@ public class VeiculoScript : MonoBehaviour
     {
         
         // Reabastecimento
-        if (outro.gameObject.CompareTag("Produto") && Input.GetKeyDown(teclaInteracao))
+        if (outro.gameObject.CompareTag("Produto") && Input.GetKey(teclaInteracao))
         {
             carga = cargaMaxima;
         }
