@@ -17,7 +17,6 @@ public class PontosEntregas : MonoBehaviour
     }
     public void EntrouNoTrigger2D(Collider2D veiculo, IdPonto id)
     {
-        
     }
     public void CalculoTotalEntrega()
     {

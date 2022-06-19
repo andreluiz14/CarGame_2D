@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3972570504501371387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.6899, y: -1.068, z: 0}
-  m_LocalScale: {x: 0.63120574, y: 0.53715783, z: 1}
+  m_LocalScale: {x: 0.820218, y: 0.69800776, z: 1.2994463}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3972570506159923773}
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textoQuantidadeEntrega: {fileID: 3972570506159923775}
+  numRandom: 0
   id: 0
 --- !u!1 &3972570506159923774
 GameObject:
