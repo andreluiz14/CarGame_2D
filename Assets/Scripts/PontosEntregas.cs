@@ -8,22 +8,37 @@ public class PontosEntregas : MonoBehaviour
 {
     [SerializeField] PontoFilho[] pontoEntrega = new PontoFilho[12];
     [SerializeField] TextMeshPro[] textoQdt = new TextMeshPro[12];
-    private int[] num = new int[12];
     public int totalEntregas;
+    int rad;
     // Start is called before the first frame update
     private void Start()
     {
-        CalculoTotalEntrega();
+        GerarPontosEntrega();
     }
     public void EntrouNoTrigger2D(Collider2D veiculo, IdPonto id)
     {
     }
-    public void CalculoTotalEntrega()
+    private void CalcularTotalEntrega()
     {
-        for(int i = 0; i < 12; i++)
+        for(int i = 0; i < pontoEntrega.Length; i++)
         {
-            totalEntregas += pontoEntrega[i].numRandom;
+            
         }
     }
-
+    private void GerarPontosEntrega()
+    {
+        for (int i = 0; i < pontoEntrega.Length; i++)
+        {
+            rad = Random.Range(0, 2);
+            if(rad == 0)
+            {
+                pontoEntrega[i].gameObject.SetActive(true);
+                totalEntregas += pontoEntrega[i].numRandom;
+            }
+            else
+            {
+                pontoEntrega[i].gameObject.SetActive(false);
+            }
+        }
+    }
 }

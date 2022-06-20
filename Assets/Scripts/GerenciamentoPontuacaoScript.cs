@@ -7,8 +7,10 @@ public class GerenciamentoPontuacaoScript : MonoBehaviour
 {
     private int carga;
     private int entregasQtd;
+    private int entregasTotal;
     [SerializeField] Text textoCarga;
     [SerializeField] Text textoEntregas;
+    [SerializeField] Text textoEntregasTotal;
     public int Carga 
     { 
         get { return carga; } 
@@ -28,4 +30,15 @@ public class GerenciamentoPontuacaoScript : MonoBehaviour
             PlayerPrefs.SetInt("Entregas: ", entregasQtd);
         }
     }
+    public int EntregasTotal
+    {
+        get { return entregasTotal; }
+        set
+        {
+            entregasTotal = value;
+            textoEntregasTotal.text = "Total de encomendas: " + entregasTotal.ToString();
+            PlayerPrefs.SetInt("Total de encomendas: ", entregasTotal);
+        }
+    }
+
 }
