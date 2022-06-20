@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+
 
 public class InterfaceScript : MonoBehaviour
 {
@@ -18,10 +20,12 @@ public class InterfaceScript : MonoBehaviour
         pontuacao.Entregas = PlayerPrefs.GetInt("Entregas: ", 0);
         pontuacao.EntregasTotal = PlayerPrefs.GetInt("Total de encomendas: ", 0);
     }
-    void Update()
+    void LateUpdate()
     {
         pontuacao.Carga = veiculo.carga;
         pontuacao.Entregas = veiculo.entrega;
         pontuacao.EntregasTotal = pontosEntregas.totalEntregas;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene(0);
     }
 }

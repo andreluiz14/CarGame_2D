@@ -18,9 +18,13 @@ public class PontoFilho : MonoBehaviour
     public IdPonto id = new IdPonto();
     public int entregas;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         GerarQuantidaEntrega();
+
+    }
+    void Start()
+    {
         veiculoScript = FindObjectOfType<VeiculoScript>();
         pontosEntega = FindObjectOfType<PontosEntregas>();
         pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
