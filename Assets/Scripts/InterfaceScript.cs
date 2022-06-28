@@ -5,24 +5,25 @@ using UnityEngine.UI;
 
 public class InterfaceScript : MonoBehaviour
 {
-    private VeiculoScript veiculo;
-    private GerenciamentoPontuacaoScript pontuacao;
+    [SerializeField]
+    private VeiculoScript[] veiculos = new VeiculoScript[2];
     private PontosEntregas pontosEntregas;
 
+    [SerializeField] Text textoCargaJogador1;
+    [SerializeField] Text textoEntregasQtdJogador1;
+    [SerializeField] Text textoEntregasTotalJogador1;
+    [SerializeField] Text textoCargaJogador2;
 
     [SerializeField] GameObject menuInGame;
+
     // Update is called once per frame
     private void Start()
     {
         menuInGame.SetActive(false);
 
-        veiculo = FindObjectOfType<VeiculoScript>();
-        pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
         pontosEntregas = FindObjectOfType<PontosEntregas>();
 
-        pontuacao.Carga = PlayerPrefs.GetInt("Carga: ",0);
-        pontuacao.Entregas = PlayerPrefs.GetInt("Entregas: ", 0);
-        pontuacao.EntregasTotal = PlayerPrefs.GetInt("Total de encomendas: ", 0);
+        
     }
     void LateUpdate()
     {
@@ -32,9 +33,10 @@ public class InterfaceScript : MonoBehaviour
     }
     private void ApresentarDadosInterface()
     {
-        pontuacao.Carga = veiculo.carga;
-        pontuacao.Entregas = veiculo.entrega;
-        pontuacao.EntregasTotal = pontosEntregas.totalEntregas;
+        textoCargaJogador1.text = "Carga: " + veiculos[0].carga.ToString();
+        textoEntregasQtdJogador1.text = "Total de encomenda: " + pontosEntregas.totalEntregas.ToString();
+        textoEntregasTotalJogador1.text = "Entregas: " + veiculos[0].cargaVeiculo.EntregasTotal.ToString();
+      
     }
     private void MenuInGame()
     {

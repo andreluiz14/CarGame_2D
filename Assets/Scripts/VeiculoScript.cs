@@ -27,18 +27,19 @@ public class VeiculoScript : MonoBehaviour
 
     // jogador1
     private float horizontalSeta;
-
+    public VeiculoCarga cargaVeiculo;
     public Jogador jogador = new Jogador();
     void Start()
     {
+        cargaVeiculo = GetComponent<VeiculoCarga>();
         veiculoRb = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
-        MovimentoPrimJogador();
+        MovimentarJogadores();
         //MovimentoRelativoDirecao();
     }
-    void MovimentoPrimJogador()
+    void MovimentarJogadores()
     {
         if(jogador == Jogador.jogador1)
         InputPrimJogador();

@@ -10,7 +10,7 @@ using TMPro;
 public class PontoFilho : MonoBehaviour
 {
     PontosEntregas pontosEntega;
-    VeiculoScript veiculoScript;
+    [SerializeField] VeiculoScript[] veiculoScript;
     private GerenciamentoPontuacaoScript pontuacao;
 
     [SerializeField] TextMeshPro textoQuantidadeEntrega;
@@ -25,25 +25,14 @@ public class PontoFilho : MonoBehaviour
     }
     void Start()
     {
-        veiculoScript = FindObjectOfType<VeiculoScript>();
-        pontosEntega = FindObjectOfType<PontosEntregas>();
-        pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
+        //pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
     }
     private void OnTriggerStay2D(Collider2D veiculo)
     {
-        if (veiculoScript.gameObject.name == "Veiculo" && Input.GetKey(KeyCode.R) && veiculoScript.carga >= numRandom)
+        if (veiculo.CompareTag("Jogador1"))
         {
-            pontosEntega.EntrouNoTrigger2D(veiculo, id);
-            numRandom = CalculaEntrega(numRandom);
-            textoQuantidadeEntrega.text = numRandom.ToString();
-            //PlayerPrefs.SetInt(null, numRandom);
-            print(CalculaEntrega(numRandom));
-        }else if(veiculoScript.gameObject.name == "Veiculo" && Input.GetKey(KeyCode.R) && veiculoScript.carga < numRandom && veiculoScript.carga > 0)
-        {
-            numRandom = CalculaEntregaSeg(numRandom);
-            textoQuantidadeEntrega.text = numRandom.ToString();
-            //PlayerPrefs.SetInt(null, numRandom);
-            print(CalculaEntregaSeg(numRandom));
+            print("Jogador 1");
+            Jogador1(veiculo);
         }
     }
     private void GerarQuantidaEntrega()
@@ -54,20 +43,19 @@ public class PontoFilho : MonoBehaviour
     private int CalculaEntrega(int num)
     {
         print("if1");
-        veiculoScript.carga -= num;
+        veiculoScript[0].carga -= num;
         numRandom = numRandom - numRandom;
-        veiculoScript.entrega += num;
+        veiculoScript[0].entrega += num;
         return numRandom;
     }
     private int CalculaEntregaSeg(int num)
     {
         print("if2");
-        veiculoScript.entrega += veiculoScript.carga;
-        numRandom = numRandom - veiculoScript.carga;
-        veiculoScript.carga = 0;
+        veiculoScript[0].entrega += veiculoScript[0].carga;
+        numRandom = numRandom - veiculoScript[0].carga;
+        veiculoScript[0].carga = 0;
         return numRandom;
     }
-
     private void LateUpdate()
     {
         DesativaObjeto();
@@ -79,6 +67,24 @@ public class PontoFilho : MonoBehaviour
         {
             if (numRandom == 0)
                 gameObject.SetActive(false);
+        }
+    }
+    private void Jogador1(Collider2D jogador)
+    {
+        if (Input.GetKey(KeyCode.P) && veiculoScript[0].carga >= numRandom)
+        {
+            pontosEntega.EntrouNoTrigger2D(jogador, id);
+            numRandom = CalculaEntrega(numRandom);
+            textoQuantidadeEntrega.text = numRandom.ToString();
+            //PlayerPrefs.SetInt(null, numRandom);
+            print(CalculaEntrega(numRandom));
+        }
+        else if (Input.GetKey(KeyCode.P) && veiculoScript[0].carga < numRandom && veiculoScript[0].carga > 0)
+        {
+            numRandom = CalculaEntregaSeg(numRandom);
+            textoQuantidadeEntrega.text = numRandom.ToString();
+            //PlayerPrefs.SetInt(null, numRandom);
+            print(CalculaEntregaSeg(numRandom));
         }
     }
 

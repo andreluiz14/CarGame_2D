@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -944647205, guid: 9ff927d633ffeb043b98c322203f3c96, type: 3}
   m_Color: {r: 0.9411241, g: 0.9433962, b: 0.8312567, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -157,9 +157,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b3d4d5b16155a4384958128894b297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  veiculoScript:
+  - {fileID: 4558982081992958064, guid: dce7a5a6e1857914795ce37f6cb5ed91, type: 3}
+  - {fileID: 6638589352543618188, guid: 19335635bf33bc24c9a5424b4a8226c7, type: 3}
   textoQuantidadeEntrega: {fileID: 3972570506159923775}
   numRandom: 0
-  id: 0
+  id: 11
   entregas: 0
 --- !u!1 &3972570506159923774
 GameObject:
@@ -196,7 +199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.061, y: 0.018}
+  m_AnchoredPosition: {x: 0.115, y: 0.019}
   m_SizeDelta: {x: 0.4112, y: 0.7541}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3972570506159923772
