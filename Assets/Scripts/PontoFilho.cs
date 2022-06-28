@@ -21,18 +21,21 @@ public class PontoFilho : MonoBehaviour
     private void Awake()
     {
         GerarQuantidaEntrega();
-
     }
     void Start()
     {
+        pontosEntega = GetComponent<PontosEntregas>();
         //pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
     }
     private void OnTriggerStay2D(Collider2D veiculo)
     {
         if (veiculo.CompareTag("Jogador1"))
         {
-            print("Jogador 1");
             Jogador1(veiculo);
+        }
+        else if (veiculo.CompareTag("Jogador2"))
+        {
+            Jogador2(veiculo);
         }
     }
     private void GerarQuantidaEntrega()
@@ -40,20 +43,20 @@ public class PontoFilho : MonoBehaviour
         numRandom = Random.Range(1, 4);
         textoQuantidadeEntrega.text = numRandom.ToString();
     }
-    private int CalculaEntrega(int num)
+    private int CalculaEntrega(int num, int id)
     {
         print("if1");
-        veiculoScript[0].carga -= num;
+        veiculoScript[id].cargaVeiculo.Carga -= num;
         numRandom = numRandom - numRandom;
-        veiculoScript[0].entrega += num;
+        veiculoScript[id].cargaVeiculo.EntregasTotal += num;
         return numRandom;
     }
-    private int CalculaEntregaSeg(int num)
+    private int CalculaEntregaSeg(int num, int id)
     {
         print("if2");
-        veiculoScript[0].entrega += veiculoScript[0].carga;
-        numRandom = numRandom - veiculoScript[0].carga;
-        veiculoScript[0].carga = 0;
+        veiculoScript[id].cargaVeiculo.EntregasTotal += veiculoScript[id].cargaVeiculo.Carga;
+        numRandom = numRandom - veiculoScript[id].cargaVeiculo.Carga;
+        veiculoScript[id].cargaVeiculo.Carga = 0;
         return numRandom;
     }
     private void LateUpdate()
@@ -71,20 +74,34 @@ public class PontoFilho : MonoBehaviour
     }
     private void Jogador1(Collider2D jogador)
     {
-        if (Input.GetKey(KeyCode.P) && veiculoScript[0].carga >= numRandom)
+        if (Input.GetKey(KeyCode.P) && veiculoScript[0].cargaVeiculo.Carga >= numRandom)
         {
-            pontosEntega.EntrouNoTrigger2D(jogador, id);
-            numRandom = CalculaEntrega(numRandom);
+            //pontosEntega.EntrouNoTrigger2D(jogador, id);
+            numRandom = CalculaEntrega(numRandom, 0);
             textoQuantidadeEntrega.text = numRandom.ToString();
-            //PlayerPrefs.SetInt(null, numRandom);
-            print(CalculaEntrega(numRandom));
+            print(CalculaEntrega(numRandom, 0));
         }
-        else if (Input.GetKey(KeyCode.P) && veiculoScript[0].carga < numRandom && veiculoScript[0].carga > 0)
+        else if (Input.GetKey(KeyCode.P) && veiculoScript[0].cargaVeiculo.Carga < numRandom && veiculoScript[0].cargaVeiculo.Carga > 0)
         {
-            numRandom = CalculaEntregaSeg(numRandom);
+            numRandom = CalculaEntregaSeg(numRandom, 0);
             textoQuantidadeEntrega.text = numRandom.ToString();
-            //PlayerPrefs.SetInt(null, numRandom);
-            print(CalculaEntregaSeg(numRandom));
+            print(CalculaEntregaSeg(numRandom, 0));
+        }
+    }
+    private void Jogador2(Collider2D jogador)
+    {
+        if (Input.GetKey(KeyCode.R) && veiculoScript[1].cargaVeiculo.Carga >= numRandom)
+        {
+            //pontosEntega.EntrouNoTrigger2D(jogador, id);
+            numRandom = CalculaEntrega(numRandom, 1);
+            textoQuantidadeEntrega.text = numRandom.ToString();
+            print(CalculaEntrega(numRandom, 1));
+        }
+        else if (Input.GetKey(KeyCode.R) && veiculoScript[1].cargaVeiculo.Carga < numRandom && veiculoScript[1].cargaVeiculo.Carga > 0)
+        {
+            numRandom = CalculaEntregaSeg(numRandom, 1);
+            textoQuantidadeEntrega.text = numRandom.ToString();
+            print(CalculaEntregaSeg(numRandom, 1));
         }
     }
 

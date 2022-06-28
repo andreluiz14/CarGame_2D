@@ -13,6 +13,9 @@ public class InterfaceScript : MonoBehaviour
     [SerializeField] Text textoEntregasQtdJogador1;
     [SerializeField] Text textoEntregasTotalJogador1;
     [SerializeField] Text textoCargaJogador2;
+    [SerializeField] Text textoEntregasTotalJogador2;
+    [SerializeField] Text textoEntregasQtdJogador2;
+
 
     [SerializeField] GameObject menuInGame;
 
@@ -33,10 +36,14 @@ public class InterfaceScript : MonoBehaviour
     }
     private void ApresentarDadosInterface()
     {
-        textoCargaJogador1.text = "Carga: " + veiculos[0].carga.ToString();
+
+        textoCargaJogador1.text = "Carga: " + veiculos[0].cargaVeiculo.Carga;
         textoEntregasQtdJogador1.text = "Total de encomenda: " + pontosEntregas.totalEntregas.ToString();
         textoEntregasTotalJogador1.text = "Entregas: " + veiculos[0].cargaVeiculo.EntregasTotal.ToString();
-      
+
+        textoCargaJogador2.text = "Carga: " + veiculos[1].cargaVeiculo.Carga;
+        textoEntregasQtdJogador2.text = "Total de encomenda: " + pontosEntregas.totalEntregas.ToString();
+        textoEntregasTotalJogador2.text = "Entregas: " + veiculos[1].cargaVeiculo.EntregasTotal.ToString();
     }
     private void MenuInGame()
     {

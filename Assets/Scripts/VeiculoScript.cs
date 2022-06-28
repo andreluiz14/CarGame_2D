@@ -131,7 +131,7 @@ public class VeiculoScript : MonoBehaviour
         // Reabastecimento
         if (outro.gameObject.CompareTag("Produto") && Input.GetKey(teclaInteracao))
         {
-            carga = cargaMaxima;
+            cargaVeiculo.Carga = cargaMaxima;
         }
     }
 }
