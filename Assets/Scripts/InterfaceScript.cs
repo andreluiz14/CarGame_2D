@@ -20,6 +20,7 @@ public class InterfaceScript : MonoBehaviour
 
     [SerializeField] GameObject menuInGame;
     [SerializeField] GameObject menuVitoria;
+    private bool menuVitoriaAtivo;
     [SerializeField] TextMeshProUGUI textoGanhador;
 
     // Update is called once per frame
@@ -35,7 +36,7 @@ public class InterfaceScript : MonoBehaviour
         ApresentarDadosInterface();
         DefinirGanhador();
         MenuInGame();
-    }
+    }  
     private void ApresentarDadosInterface()
     {
         textoCargaJogador1.text = "Carga: " + veiculos[0].cargaVeiculo.Carga;
@@ -60,6 +61,17 @@ public class InterfaceScript : MonoBehaviour
             menuVitoria.SetActive(true);
             textoGanhador.color = Color.blue;
             textoGanhador.text = "Jogador 2 ganhou!";
+        }
+        /*else if(veiculos[0].cargaVeiculo.EntregasTotal == pontosEntregas.pontosVitoria - 1 && veiculos[1].cargaVeiculo.EntregasTotal == pontosEntregas.pontosVitoria - 1)
+        {
+            PausarJogo();
+            menuVitoria.SetActive(true);
+            textoGanhador.color = Color.black;
+            textoGanhador.text = "Empate!";
+        }*/
+        else
+        {
+            Despausar();
         }
     }
     private void MenuInGame()
