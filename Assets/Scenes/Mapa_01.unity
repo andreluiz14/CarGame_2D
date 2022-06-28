@@ -2659,6 +2659,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6638589352543618188, guid: 19335635bf33bc24c9a5424b4a8226c7, type: 3}
+      propertyPath: aceleracaoForca
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6638589352543618191, guid: 19335635bf33bc24c9a5424b4a8226c7, type: 3}
       propertyPath: m_Name
       value: Jogador 2
@@ -6564,6 +6568,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4558982081992958064, guid: dce7a5a6e1857914795ce37f6cb5ed91, type: 3}
+      propertyPath: aceleracaoForca
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4558982081992958067, guid: dce7a5a6e1857914795ce37f6cb5ed91, type: 3}
       propertyPath: m_Name
       value: Jogador 1
