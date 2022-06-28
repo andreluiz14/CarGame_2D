@@ -7,6 +7,7 @@ public class PontosEntregas : MonoBehaviour
     [SerializeField] PontoFilho[] pontoEntrega = new PontoFilho[24];
     public int totalEntregas;
     int rad;
+    public int pontosVitoria;
     // Start is called before the first frame update
     private void Start()
     {
@@ -30,5 +31,6 @@ public class PontosEntregas : MonoBehaviour
                 pontoEntrega[i].gameObject.SetActive(false);
             }
         }
+            pontosVitoria = totalEntregas / 2 + 1;
     }
 }
