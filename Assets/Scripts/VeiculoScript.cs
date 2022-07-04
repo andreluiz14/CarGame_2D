@@ -5,20 +5,23 @@ using UnityEngine;
 public class VeiculoScript : MonoBehaviour
 {
     Rigidbody2D veiculoRb;
-    
+    [Header("Atalhos")]
+    [SerializeField] KeyCode teclaInteracao;
+
     //Movimento baseado na direção que o jogador escolhe
+    [Header("Movimentação")]
     [SerializeField] float aceleracaoForca = 5f;
     [SerializeField] float rotacaoForca = 5f;
     [SerializeField] float rotacaoQuantidade, direcao, velocidade;
 
+    //Entregas
+    [Header("Carga do veículo")]
+    [SerializeField] int cargaMaxima;
+    public int carga, entrega;
+    
     void Start()
     {
         veiculoRb = GetComponent<Rigidbody2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
     private void FixedUpdate()
     {
@@ -35,9 +38,18 @@ public class VeiculoScript : MonoBehaviour
 
         veiculoRb.AddRelativeForce(Vector2.up * velocidade);
         if(velocidade != 0)
-            veiculoRb.AddRelativeForce(-Vector2.right * veiculoRb.velocity.magnitude * rotacaoQuantidade /2);
+            veiculoRb.AddRelativeForce(-Vector2.right * veiculoRb.velocity.magnitude * rotacaoQuantidade / 2);
 
         if (velocidade <= 0.5f)
             veiculoRb.angularVelocity = 0f;
+    }
+    private void OnTriggerStay2D(Collider2D outro)
+    {
+        
+        // Reabastecimento
+        if (outro.gameObject.CompareTag("Produto") && Input.GetKey(teclaInteracao))
+        {
+            carga = cargaMaxima;
+        }
     }
 }
