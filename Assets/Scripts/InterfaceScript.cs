@@ -1,40 +1,78 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class InterfaceScript : MonoBehaviour
 {
-    private VeiculoScript veiculo;
-    private GerenciamentoPontuacaoScript pontuacao;
+
+    [SerializeField] private  VeiculoScript[] veiculos = new VeiculoScript[2];
     private PontosEntregas pontosEntregas;
+
+    [SerializeField] Text textoCargaJogador1;
+    [SerializeField] Text textoEntregasQtdJogador1;
+    [SerializeField] Text textoEntregasTotalJogador1;
+    [SerializeField] Text textoCargaJogador2;
+    [SerializeField] Text textoEntregasTotalJogador2;
+    [SerializeField] Text textoEntregasQtdJogador2;
 
 
     [SerializeField] GameObject menuInGame;
+    [SerializeField] GameObject menuVitoria;
+    private bool menuVitoriaAtivo;
+    [SerializeField] TextMeshProUGUI textoGanhador;
+
     // Update is called once per frame
     private void Start()
     {
         menuInGame.SetActive(false);
+        menuVitoria.SetActive(false);
 
-        veiculo = FindObjectOfType<VeiculoScript>();
-        pontuacao = FindObjectOfType<GerenciamentoPontuacaoScript>();
         pontosEntregas = FindObjectOfType<PontosEntregas>();
-
-        pontuacao.Carga = PlayerPrefs.GetInt("Carga: ",0);
-        pontuacao.Entregas = PlayerPrefs.GetInt("Entregas: ", 0);
-        pontuacao.EntregasTotal = PlayerPrefs.GetInt("Total de encomendas: ", 0);
     }
     void LateUpdate()
     {
         ApresentarDadosInterface();
+        DefinirGanhador();
         MenuInGame();
-        
-    }
+    }  
     private void ApresentarDadosInterface()
     {
-        pontuacao.Carga = veiculo.carga;
-        pontuacao.Entregas = veiculo.entrega;
-        pontuacao.EntregasTotal = pontosEntregas.totalEntregas;
+        textoCargaJogador1.text = "Carga: " + veiculos[0].cargaVeiculo.Carga;
+        textoEntregasQtdJogador1.text = "Total de encomenda: " + pontosEntregas.totalEntregas.ToString();
+        textoEntregasTotalJogador1.text = "Entregas: " + veiculos[0].cargaVeiculo.EntregasTotal.ToString();
+
+        textoCargaJogador2.text = "Carga: " + veiculos[1].cargaVeiculo.Carga;
+        textoEntregasQtdJogador2.text = "Total de encomenda: " + pontosEntregas.totalEntregas.ToString();
+        textoEntregasTotalJogador2.text = "Entregas: " + veiculos[1].cargaVeiculo.EntregasTotal.ToString();
+    }
+    private void DefinirGanhador()
+    {
+        if (veiculos[0].cargaVeiculo.EntregasTotal >= pontosEntregas.pontosVitoria)
+        {
+            PausarJogo();
+            menuVitoria.SetActive(true);
+            textoGanhador.color = Color.magenta;
+            textoGanhador.text = "Jogador 1 ganhou!";
+        }else if (veiculos[1].cargaVeiculo.EntregasTotal >= pontosEntregas.pontosVitoria)
+        {
+            PausarJogo();
+            menuVitoria.SetActive(true);
+            textoGanhador.color = Color.blue;
+            textoGanhador.text = "Jogador 2 ganhou!";
+        }
+        /*else if(veiculos[0].cargaVeiculo.EntregasTotal == pontosEntregas.pontosVitoria - 1 && veiculos[1].cargaVeiculo.EntregasTotal == pontosEntregas.pontosVitoria - 1)
+        {
+            PausarJogo();
+            menuVitoria.SetActive(true);
+            textoGanhador.color = Color.black;
+            textoGanhador.text = "Empate!";
+        }*/
+        else
+        {
+            Despausar();
+        }
     }
     private void MenuInGame()
     {
@@ -47,18 +85,19 @@ public class InterfaceScript : MonoBehaviour
     }
     public void ContinuarJogo()
     {
-        menuInGame.SetActive(false);
         Despausar();
+        menuInGame.SetActive(false);
     }
     public void ReiniciarJogo()
     {
-        SceneManager.LoadScene(1);
+        menuVitoria.SetActive(false);
         Despausar();
+        SceneManager.LoadScene(1);
     }
     public void RetornarMenuPrincipal()
     {
-        SceneManager.LoadScene(0);
         Despausar();
+        SceneManager.LoadScene(0);
     }
     private void PausarJogo()
     {
